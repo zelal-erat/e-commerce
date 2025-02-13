@@ -88,9 +88,7 @@ export default function Header() {
           </div>
         )}
       </div>
-      <div>
-        <img src="https://images.placeholders.dev/350x150" alt="" />
-      </div>
+     
     </div>
   );
 }
