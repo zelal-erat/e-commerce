@@ -17,7 +17,7 @@ export default function HeroSlider() {
   };
 
   return (
-    <div className="my-16">
+    <div className="">
       <Slider {...settings}>
         <div>
           <img

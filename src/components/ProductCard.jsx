@@ -27,10 +27,10 @@ const ProductCard = () => {
           Problems trying to resolve the conflict between
         </p>
       </div>
-      <div className="grid grid-cols-1  lg:grid-cols-4  grid-row-2 gap-6">
+      <div className="grid grid-cols-1  lg:grid-cols-4  grid-row-2 gap-6 ">
         {products.map((product, index) => (
           <div key={index} className="p-4 ">
-            <div className="bg-gray-300 h-40 w-full flex items-center justify-center rounded-md">
+            <div className="bg-gray-300 h-40 w-full flex items-center justify-center rounded-md lg:w-60 lg:h-60 ">
               <span className="text-gray-500">Placeholder Image</span>
             </div>
             <div className="text-center mt-3">

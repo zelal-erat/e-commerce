@@ -1,5 +1,6 @@
 import { AlignRight, ChevronDown, Facebook, Instagram, Mail, Phone, Search, ShoppingCart, Twitter, UserRound, Youtube } from "lucide-react";
 import { useState } from "react"; // Import useState for managing state
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track mobile menu visibility
@@ -44,12 +45,13 @@ export default function Header() {
         <div className="flex justify-around mt-4 lg:justify-between lg:px-16">
           <h1 className="font-bold">Bandage</h1>
           <div className="hidden lg:flex space-x-4 text-[#737373] font-medium">
-            <a href="">Home</a>
+          <Link to="/">Home</Link>
             <div className="relative">
               {/* Shop link with ChevronDown */}
-              <a href="" className="flex" onClick={toggleDropdown}>
+              <Link to="/shop" className="flex" onClick={toggleDropdown}>
                 Shop <ChevronDown />
-              </a>
+              </Link>
+
 
               {/* Dropdown menu for Men and Women */}
               {isDropdownOpen && (
@@ -79,10 +81,11 @@ export default function Header() {
           <div className="flex justify-around lg:hidden">
             <nav>
               <ul className="p-7.5 text-3xl text-center space-y-5 text-[#737373] font-medium">
-                <li>Home</li>
-                <li>Product</li>
-                <li>Pricing</li>
-                <li>Contact</li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/shop">Shop</Link></li>
+              <li><Link to="/product">Product</Link></li>
+              <li><Link to="/pricing">Pricing</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
               </ul>
             </nav>
           </div>
