@@ -11,7 +11,7 @@ const logos = [
 
 const Clients = () => {
   return (
-    <div className="w-20 py-4 flex flex-col items-center lg:flex-row  lg:w-full lg:px-16 lg:gap-[100px]">
+    <div className="  flex flex-col items-center bg-gray-100 lg:flex-row  lg:gap-[100px] lg:justify-around">
       {logos.map((logo, index) => (
         <a
           key={index}

@@ -1,28 +1,42 @@
 export default function ShopCard() {
     return (
-        <div className="bg-white">
-            <div className="container mx-auto py-12">
-                <h2 className="text-2xl font-bold mb-4 text-center">EDITOR'S PICK</h2>
-                <p className="text-gray-600 text-center mb-8">Problems trying to resolve the conflict between</p>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <div className="flex flex-col items-center relative">
-                        <img src="https://images.placeholders.dev/350x150" alt="Men's Clothing" className="rounded-md w-full" />
-                        <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">MEN</button>
-                    </div>
-                    <div className="flex flex-col items-center relative">
-                        <img src="https://images.placeholders.dev/350x150" alt="Women's Clothing" className="rounded-md w-full" />
-                        <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">WOMEN</button>
+        <div className="bg-white py-12">
+            <div className="container mx-auto text-center px-4">
+                <h2 className="text-2xl font-bold mb-2">EDITOR'S PICK</h2>
+                <p className="text-gray-500 mb-6">Problems trying to resolve the conflict between</p>
+
+                {/* Grid Yapısı */}
+                <div className="flex flex-col gap-4 lg:flex lg:flex-row lg:justify-center  lg:gap-6 max-w-5xl mx-auto">
+                    
+                    {/* Büyük Görseller - Sol Taraf */}
+                    <div className="lg:col-span-2 flex flex-col gap-4 lg:flex lg:flex-row">
+                        {/* MEN */}
+                        <div className="relative">
+                            <img src="https://images.placeholders.dev/300x300" alt="Men" className="w-full h-full object-cover rounded-md" />
+                            <button className="absolute bottom-4 left-4 bg-white text-black font-semibold px-6 py-2 shadow-md">MEN</button>
+                        </div>
+
+                        {/* WOMEN */}
+                        <div className="relative">
+                            <img src="https://images.placeholders.dev/300x300" alt="Women" className="w-full h-full object-cover rounded-md" />
+                            <button className="absolute bottom-4 left-4 bg-white text-black font-semibold px-6 py-2 shadow-md">WOMEN</button>
+                        </div>
                     </div>
 
-                    <div className="flex flex-col items-center relative">
-                        <img src="https://images.placeholders.dev/350x150" alt="Accessories" className="rounded-md w-full" />
-                        <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">ACCESSORIES</button>
-                    </div>
-                    <div className="flex flex-col items-center relative">
-                        <img src="https://images.placeholders.dev/350x150" alt="Accessories" className="rounded-md w-full" />
-                        <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">ACCESSORIES</button>
-                    </div>
+                    {/* Küçük Görseller - Sağ Taraf */}
+                    <div className="flex flex-col gap-4">
+                        {/* ACCESSORIES */}
+                        <div className="relative">
+                            <img src="https://images.placeholders.dev/350x150" alt="Accessories" className="w-full h-full object-cover rounded-md" />
+                            <button className="absolute bottom-4 left-4 bg-white text-black font-semibold px-6 py-2 shadow-md">ACCESSORIES</button>
+                        </div>
 
+                        {/* KIDS */}
+                        <div className="relative">
+                            <img src="https://images.placeholders.dev/350x150" alt="Kids" className="w-full h-full object-cover rounded-md" />
+                            <button className="absolute bottom-4 left-4 bg-white text-black font-semibold px-6 py-2 shadow-md">KIDS</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

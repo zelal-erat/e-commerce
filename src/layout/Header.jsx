@@ -64,16 +64,33 @@ export default function Header() {
               )}
             </div>
             <a href="">About</a>
-            <a href="">Blog</a>
+            <Link to="/blog">Blog</Link>
             <a href="">Contact</a>
             <a href="">Pages</a>
           </div>
-          <div className="flex gap-4">
-            <UserRound />
-            <Search />
-            <ShoppingCart />
-            <AlignRight onClick={toggleMenu} /> {/* Toggle menu visibility when clicked */}
-          </div>
+          <ul className="flex gap-4 lg:text-sky-300 ">
+  <li>
+    <a href="#" className="btn lg:flex  ">
+      <UserRound className="icon" />
+      <span className="hidden lg:block font-bold text-sky-500">Login/register</span>
+    </a>
+  </li>
+  <li>
+    <a href="#" className="btn">
+      <Search className="icon" />
+    </a>
+  </li>
+  <li>
+    <a href="#" className="btn">
+      <ShoppingCart className="icon" />
+    </a>
+  </li>
+  <li>
+    <a href="#" onClick={toggleMenu} className="btn lg:hidden">
+      <AlignRight className="icon" />
+    </a>
+  </li>
+</ul>
         </div>
 
         {/* Mobile Navigation Menu */}
