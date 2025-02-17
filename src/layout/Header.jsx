@@ -66,6 +66,7 @@ export default function Header() {
             <a href="">About</a>
             <Link to="/blog">Blog</Link>
             <Link to="/contact">Contact</Link>
+            <Link to="/team">Team</Link>
             <a href="">Pages</a>
           </div>
           <ul className="flex gap-4 lg:text-sky-300 ">
@@ -103,6 +104,7 @@ export default function Header() {
               <li><Link to="/product">Product</Link></li>
               <li><Link to="/pricing">Pricing</Link></li>
               <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/team">Team</Link></li>
               </ul>
             </nav>
           </div>
