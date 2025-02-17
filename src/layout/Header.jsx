@@ -63,7 +63,7 @@ export default function Header() {
                 </div>
               )}
             </div>
-            <a href="">About</a>
+            <Link to="/about">About</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/contact">Contact</Link>
             <Link to="/team">Team</Link>
@@ -101,6 +101,7 @@ export default function Header() {
               <ul className="p-7.5 text-3xl text-center space-y-5 text-[#737373] font-medium">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/shop">Shop</Link></li>
+              <li><Link to="/about">About</Link></li>
               <li><Link to="/product">Product</Link></li>
               <li><Link to="/pricing">Pricing</Link></li>
               <li><Link to="/contact">Contact</Link></li>
