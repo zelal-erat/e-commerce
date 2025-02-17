@@ -26,6 +26,7 @@ export default function HeroSlider() {
             className="w-full h-auto"
           />
         </div>
+        
         <div>
           <img
             src="https://images.placeholders.dev/350x150"

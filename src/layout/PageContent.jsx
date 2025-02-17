@@ -1,21 +1,24 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage"; // HomePage bileşenini içeri aktar
-import ProductPage from "../pages/ProductPage"; // ProductPage bileşenini içeri aktar
-import AboutPage from "../pages/AboutPage"; // AboutPage bileşenini içeri aktar
-import BlogPage from "../pages/BlogPage"; // BlogPage bileşenini içeri aktar
+import HomePage from "../pages/HomePage";
+import ProductPage from "../pages/ProductPage";
+import ProductDetailsPage from "../pages/ProductDetailsPage"; // Yeni bileşeni içe aktar
+import AboutPage from "../pages/AboutPage";
+import BlogPage from "../pages/BlogPage";
 import ShopPage from "../pages/ShopPage";
+import ContactPage from "../pages/ContactPage";
 
 export default function PageContent() {
   return (
     <div className="container mx-auto px-4">
       <Switch>
-        {/* Sayfa yönlendirmelerini buraya ekle */}
         <Route path="/" exact component={HomePage} />
         <Route path="/product" exact component={ProductPage} />
+        <Route path="/product/:id" exact component={ProductDetailsPage} /> {/* Yeni Route */}
         <Route path="/shop" exact component={ShopPage} />
         <Route path="/about" exact component={AboutPage} />
         <Route path="/blog" exact component={BlogPage} />
+        <Route path="/contact" exact component={ContactPage} />
       </Switch>
     </div>
   );

@@ -65,7 +65,7 @@ export default function Header() {
             </div>
             <a href="">About</a>
             <Link to="/blog">Blog</Link>
-            <a href="">Contact</a>
+            <Link to="/contact">Contact</Link>
             <a href="">Pages</a>
           </div>
           <ul className="flex gap-4 lg:text-sky-300 ">
