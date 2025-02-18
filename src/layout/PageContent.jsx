@@ -22,7 +22,7 @@ export default function PageContent() {
         <Route path="/blog" exact component={BlogPage} />
         <Route path="/contact" exact component={ContactPage} />
        
-        <Route path="/sign" exact component={SignUpPage} />
+        <Route path="/signup" exact component={SignUpPage} />
       </Switch>
     </div>
   );
