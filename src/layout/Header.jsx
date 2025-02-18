@@ -71,10 +71,10 @@ export default function Header() {
           </div>
           <ul className="flex gap-4 lg:text-sky-300 ">
   <li>
-    <a href="#" className="btn lg:flex  ">
-      <UserRound className="icon" />
-      <span className="hidden lg:block font-bold text-sky-500">Login/register</span>
-    </a>
+   <Link to="/signup" className="btn lg:flex">
+    <UserRound className="icon" />
+    <span className="hidden lg:block font-bold text-sky-500">Login/register</span>
+  </Link>
   </li>
   <li>
     <a href="#" className="btn">
