@@ -8,6 +8,7 @@ import BlogPage from "../pages/BlogPage";
 import ShopPage from "../pages/ShopPage";
 import ContactPage from "../pages/ContactPage";
 import TeamPage from "../pages/TeamPage";
+import SignUpPage from "../pages/SignUpPage";
 
 export default function PageContent() {
   return (
@@ -20,7 +21,8 @@ export default function PageContent() {
         <Route path="/about" exact component={AboutPage} />
         <Route path="/blog" exact component={BlogPage} />
         <Route path="/contact" exact component={ContactPage} />
-        <Route path="/team" exact component={TeamPage} />
+       
+        <Route path="/signup" exact component={SignUpPage} />
       </Switch>
     </div>
   );
