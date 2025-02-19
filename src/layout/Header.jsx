@@ -1,4 +1,4 @@
-import { AlignRight, ChevronDown, Facebook, Instagram, Mail, Phone, Search, ShoppingCart, Twitter, UserRound, Youtube } from "lucide-react";
+import { AlignRight, ChevronDown, Facebook, Instagram, Mail, Phone, Search, ShoppingCart, Twitter, UserRound, UserRoundIcon, Youtube } from "lucide-react";
 import { useState } from "react"; // Import useState for managing state
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
