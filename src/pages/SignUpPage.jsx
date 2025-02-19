@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
-  const roles = useSelector((state) => state.client.roles); // Redux Store'dan rolleri çek
+  const roles = useSelector((state) => state.client.roles);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -26,40 +26,37 @@ export default function SignUpPage() {
   } = useForm({ defaultValues: { role_id: 3 } });
 
   const watchRole = watch("role_id", 3);
+  const watchPassword = watch("password", "");
 
   useEffect(() => {
-    dispatch(fetchRoles()); // Roller önceden yüklenmemişse API'den çek
+    dispatch(fetchRoles());
   }, [dispatch]);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
+    const { confirm_password, ...formattedData } = data;
+    formattedData.role_id = Number(formattedData.role_id);
 
-    const formattedData = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      role_id: Number(data.role_id),
-      store:
-        data.role_id === 2
-          ? {
-              name: data.store_name,
-              phone: data.store_phone,
-              tax_no: data.store_tax_no,
-              bank_account: data.store_bank_account,
-            }
-          : undefined,
-    };
+    if (formattedData.role_id === 2) {
+      formattedData.store = {
+        name: formattedData.store_name,
+        phone: formattedData.store_phone,
+        tax_no: formattedData.store_tax_no,
+        bank_account: formattedData.store_bank_account,
+      };
+    } else {
+      delete formattedData.store;
+    }
 
     try {
       const response = await axiosInstance.post("/signup", formattedData);
       alert("Hesabınızı etkinleştirmek için e-postanızı kontrol edin!");
-      dispatch(setUser(response.data.user)); // Kullanıcıyı Redux Store'a kaydet
+      dispatch(setUser(response.data.user));
       window.history.back();
     } catch (error) {
       console.error("Kayıt Hatası:", error.response);
       alert(error.response?.data?.message || "Kayıt sırasında hata oluştu.");
     }
-
     setIsSubmitting(false);
   };
 
@@ -95,10 +92,19 @@ export default function SignUpPage() {
         className="w-full p-2 border border-gray-300 rounded"
       />
       {errors.password && (
-        <p className="text-red-500 text-sm">
-          Şifre en az 8 karakter olmalı, büyük, küçük harf ve özel karakter içermelidir.
-        </p>
+        <p className="text-red-500 text-sm">Şifre en az 8 karakter olmalı, büyük, küçük harf ve özel karakter içermelidir.</p>
       )}
+
+      <input
+        type="password"
+        placeholder="Şifreyi Onayla"
+        {...register("confirm_password", {
+          required: "Şifre onayı gereklidir.",
+          validate: (value) => value === watchPassword || "Şifreler eşleşmiyor.",
+        })}
+        className="w-full p-2 border border-gray-300 rounded"
+      />
+      {errors.confirm_password && <p className="text-red-500 text-sm">{errors.confirm_password.message}</p>}
 
       <select {...register("role_id", { valueAsNumber: true })} className="w-full p-2 border border-gray-300 rounded">
         {roles.map((role) => (
@@ -110,41 +116,10 @@ export default function SignUpPage() {
 
       {watchRole === 2 && (
         <>
-          <input
-            type="text"
-            placeholder="Mağaza Adı"
-            {...register("store_name", { required: true, minLength: 3 })}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          {errors.store_name && <p className="text-red-500 text-sm">Mağaza adı en az 3 karakter olmalı.</p>}
-
-          <input
-            type="text"
-            placeholder="Mağaza Telefonu"
-            {...register("store_phone", { required: true, pattern: /^\+90\d{10}$/ })}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          {errors.store_phone && (
-            <p className="text-red-500 text-sm">Geçerli bir Türkiye numarası girin (+90XXXXXXXXXX).</p>
-          )}
-
-          <input
-            type="text"
-            placeholder="Vergi Kimlik No (T XXXX V XXXXXX)"
-            {...register("store_tax_no", { required: true, pattern: /^T \d{4} V \d{6}$/ })}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          {errors.store_tax_no && <p className="text-red-500 text-sm">Vergi kimlik numarası doğru formatta olmalı.</p>}
-
-          <input
-            type="text"
-            placeholder="Banka Hesap No (IBAN)"
-            {...register("store_bank_account", { required: true, pattern: /^TR\d{24}$/ })}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          {errors.store_bank_account && (
-            <p className="text-red-500 text-sm">Geçerli bir IBAN girin (TR ile başlamalı ve 26 karakter olmalıdır).</p>
-          )}
+          <input type="text" placeholder="Mağaza Adı" {...register("store_name", { required: true, minLength: 3 })} className="w-full p-2 border border-gray-300 rounded" />
+          <input type="text" placeholder="Mağaza Telefonu" {...register("store_phone", { required: true, pattern: /^\+90\d{10}$/ })} className="w-full p-2 border border-gray-300 rounded" />
+          <input type="text" placeholder="Vergi Kimlik No (T XXXX V XXXXXX)" {...register("store_tax_no", { required: true, pattern: /^T \d{4} V \d{6}$/ })} className="w-full p-2 border border-gray-300 rounded" />
+          <input type="text" placeholder="Banka Hesap No (IBAN)" {...register("store_bank_account", { required: true, pattern: /^TR\d{24}$/ })} className="w-full p-2 border border-gray-300 rounded" />
         </>
       )}
 
