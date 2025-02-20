@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { fetchRoles } from "../actions/thunkAction";
 import { setUser } from "../reducers/clientReducer";
+import { Link } from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com",
@@ -52,7 +53,7 @@ export default function SignUpPage() {
       const response = await axiosInstance.post("/signup", formattedData);
       alert("Hesabınızı etkinleştirmek için e-postanızı kontrol edin!");
       dispatch(setUser(response.data.user));
-      window.history.back();
+      window.history.back(); // Signup işleminden sonra login sayfasına dön
     } catch (error) {
       console.error("Kayıt Hatası:", error.response);
       alert(error.response?.data?.message || "Kayıt sırasında hata oluştu.");
@@ -130,6 +131,10 @@ export default function SignUpPage() {
       >
         {isSubmitting ? "Gönderiliyor..." : "Kaydol"}
       </button>
+
+      <div className="text-center">
+        <Link to="/login" className="text-blue-500">Zaten bir hesabınız var mı? Giriş yapın.</Link>
+      </div>
     </form>
   );
 }
