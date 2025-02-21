@@ -9,6 +9,7 @@ import ShopPage from "../pages/ShopPage";
 import ContactPage from "../pages/ContactPage";
 import TeamPage from "../pages/TeamPage";
 import SignUpPage from "../pages/SignUpPage";
+import LoginPage from "../pages/LoginPage";
 
 export default function PageContent() {
   return (
@@ -26,6 +27,7 @@ export default function PageContent() {
        
        
         <Route path="/signup" exact component={SignUpPage} />
+        <Route path="/login" exact component={LoginPage} />
       </Switch>
     </div>
   );
