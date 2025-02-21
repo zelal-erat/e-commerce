@@ -8,16 +8,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { checkAuth } from "./actions/authAction";
 function App() {
-  const dispatch = useDispatch();
+ const dispatch = useDispatch();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      console.log("checkAuth çalıştırılıyor...");
-      dispatch(checkAuth());
-    }
-  }, [dispatch]);
-  
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    console.log("checkAuth çalıştırılıyor...");
+    dispatch(checkAuth());
+  }
+}, [dispatch]);
+
   
   return (
     <Router>
@@ -36,3 +36,4 @@ function App() {
 }
 
 export default App;
+

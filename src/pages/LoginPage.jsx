@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-import { clearErrors, loginUser } from "../actions/authAction";
+import { clearErrors, loginUser,  } from "../actions/authAction";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
