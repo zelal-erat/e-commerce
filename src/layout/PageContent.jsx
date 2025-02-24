@@ -23,6 +23,7 @@ export default function PageContent() {
         <Route path="/blog" exact component={BlogPage} />
         <Route path="/contact" exact component={ContactPage} />
 
+        <Route path="/shop/:gender/:categoryName/:categoryId" component={ShopPage} />
         <Route path="/team" exact component={TeamPage} />
        
        
