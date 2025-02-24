@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Gravatar from "react-gravatar"; // Import Gravatar component
+import Gravatar from "react-gravatar"; 
 import { AlignRight, ChevronDown, Facebook, Instagram, Mail, Phone, Search, ShoppingCart, Twitter, UserRound, Youtube } from "lucide-react";
 import { logoutUser } from "../actions/authAction";
+import CategoryDropdown from "../components/CategoryDropdown";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dispatch = useDispatch(); // Dispatch to logout
+  const dispatch = useDispatch(); 
 
-  const user = useSelector((state) => state.auth.user); // Get user info from Redux
+  const user = useSelector((state) => state.auth.user); 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,7 +23,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser()); // Trigger logout
+    dispatch(logoutUser()); 
   };
 
   return (
@@ -49,32 +50,19 @@ export default function Header() {
       <div>
         <div className="flex justify-around mt-4 lg:justify-between lg:px-16">
           <h1 className="font-bold">Bandage</h1>
-          <div className="hidden lg:flex space-x-4 text-[#737373] font-medium">
-            <Link to="/">Home</Link>
-            <div className="relative">
-              <Link to="/shop" className="flex" onClick={toggleDropdown}>
-                Shop <ChevronDown />
-              </Link>
-              {isDropdownOpen && (
-                <div className="absolute left-0 mt-2 bg-white text-black shadow-lg w-40 rounded-md">
-                  <ul className="space-y-2 text-sm p-3">
-                    <li><a href="">Men</a></li>
-                    <li><a href="">Women</a></li>
-                  </ul>
-                </div>
-              )}
-            </div>
-            <Link to="/about">About</Link>
-            <Link to="/blog">Blog</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/team">Team</Link>
-            <a href="">Pages</a>
-          </div>
+          <nav className="hidden lg:flex items-center space-x-8 text-[#737373]">
+            <Link to="/" className="hover:text-[#252B42] transition-colors duration-200 py-2">Home</Link>
+            <CategoryDropdown />
+            <Link to="/about" className="hover:text-[#252B42] transition-colors duration-200 py-2">About</Link>
+            <Link to="/blog" className="hover:text-[#252B42] transition-colors duration-200 py-2">Blog</Link>
+            <Link to="/contact" className="hover:text-[#252B42] transition-colors duration-200 py-2">Contact</Link>
+            <Link to="/team" className="hover:text-[#252B42] transition-colors duration-200 py-2">Team</Link>
+            <Link to="/pages" className="hover:text-[#252B42] transition-colors duration-200 py-2">Pages</Link>
+          </nav>
 
           <ul className="flex gap-4 lg:text-sky-300 ">
             <li>
               {user ? (
-                // Display user info, Gravatar image and Logout button if user is logged in
                 <div className="flex items-center gap-2">
                   <Gravatar email={user.email} size={30} className="rounded-full" />
                   <span className="text-sky-500 font-bold">{user.name}</span>
