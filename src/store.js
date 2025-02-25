@@ -7,6 +7,7 @@ import shoppingCartReducer from "./reducers/shoppingCartReducer";
 import productReducer from "./reducers/productReducer ";
 import authReducer from "./reducers/authReducer";
 import categoryReducer from "./reducers/categoryReducer";
+import cartReducer from "./reducers/cartReducer";
 
 // Tüm reducer'ları birleştiriyoruz
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   shoppingCart: shoppingCartReducer,
   auth: authReducer,
   categories: categoryReducer,
+  cart: cartReducer,
 });
 
 // Middleware ekleyerek store'u oluşturuyoruz

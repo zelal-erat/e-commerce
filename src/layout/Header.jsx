@@ -4,14 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import Gravatar from "react-gravatar"; 
 import { AlignRight, ChevronDown, Facebook, Instagram, Mail, Phone, Search, ShoppingCart, Twitter, UserRound, Youtube } from "lucide-react";
 import { logoutUser } from "../actions/authAction";
+import { toggleCart } from "../reducers/cartReducer";
 import CategoryDropdown from "../components/CategoryDropdown";
+import CartDropdown from "../components/CartDropdown";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dispatch = useDispatch(); 
 
-  const user = useSelector((state) => state.auth.user); 
+  const user = useSelector((state) => state.auth.user);
+  const { cart, isOpen } = useSelector((state) => state.cart);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,6 +28,8 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(logoutUser()); 
   };
+
+  const cartItemCount = cart.reduce((total, item) => total + item.count, 0);
 
   return (
     <div>
@@ -80,10 +85,16 @@ export default function Header() {
                 <Search className="icon" />
               </a>
             </li>
-            <li>
-              <a href="#" className="btn">
+            <li className="relative">
+              <button onClick={() => dispatch(toggleCart())} className="btn flex items-center">
                 <ShoppingCart className="icon" />
-              </a>
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItemCount}
+                  </span>
+                )}
+              </button>
+              {isOpen && <CartDropdown />}
             </li>
             <li>
               <a href="#" onClick={toggleMenu} className="btn lg:hidden">
