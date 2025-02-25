@@ -1,15 +1,18 @@
 import { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-
-const categories = {
-  Kadın: ["Bags", "Belts", "Cosmetics", "Bags", "Hats"],
-  Erkek: ["Bags", "Belts", "Cosmetics", "Bags", "Hats"],
-};
+import { fetchCategories } from "../actions/categoryActions";
 
 export default function CategoryDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const dispatch = useDispatch();
+  const { categories, loading } = useSelector(state => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -20,6 +23,15 @@ export default function CategoryDropdown() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
+
+  // Kategorileri cinsiyete göre grupla
+  const categoriesByGender = categories.reduce((acc, category) => {
+    if (!acc[category.gender]) {
+      acc[category.gender] = [];
+    }
+    acc[category.gender].push(category);
+    return acc;
+  }, {});
 
   return (
     <div className="relative inline-flex items-center" ref={dropdownRef}>
@@ -55,28 +67,34 @@ export default function CategoryDropdown() {
             </div>
 
             {/* Categories Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 p-4 gap-6">
-              {Object.entries(categories).map(([gender, items]) => (
-                <div key={gender} className="space-y-3">
-                  <h3 className="font-bold text-[#252B42] text-lg pb-2 border-b border-gray-100">
-                    {gender}
-                  </h3>
-                  <ul className="space-y-2">
-                    {items.map((item, index) => (
-                      <li key={index}>
-                        <Link
-                          to={`/shop/${gender.toLowerCase()}/${item.toLowerCase()}`}
-                          className="block text-[#737373] hover:text-[#252B42] transition-colors duration-200 py-1"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {item}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+            {loading ? (
+              <div className="flex justify-center items-center p-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 p-4 gap-6">
+                {Object.entries(categoriesByGender).map(([gender, genderCategories]) => (
+                  <div key={gender} className="space-y-3">
+                    <h3 className="font-bold text-[#252B42] text-lg pb-2 border-b border-gray-100">
+                      {gender}
+                    </h3>
+                    <ul className="space-y-2">
+                      {genderCategories.map((category) => (
+                        <li key={category.id}>
+                          <Link
+                            to={`/shop/${category.gender}/${category.name}/${category.id}`}
+                            className="block text-[#737373] hover:text-[#252B42] transition-colors duration-200 py-1"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {category.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}
