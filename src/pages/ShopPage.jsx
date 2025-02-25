@@ -137,7 +137,15 @@ export default function ShopPage() {
                 : "grid-cols-1"
             } gap-6 mb-8`}>
               {productList?.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard 
+                  key={product.id} 
+                  product={product}
+                  gender={gender || "all"}
+                  category={{
+                    name: categoryName || "all-products",
+                    id: categoryId
+                  }}
+                />
               ))}
             </div>
 

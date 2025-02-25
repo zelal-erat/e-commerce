@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import ProductPage from "../pages/ProductPage";
-import ProductDetailsPage from "../pages/ProductDetailsPage"; // Yeni bileşeni içe aktar
+ // Yeni bileşeni içe aktar
 import AboutPage from "../pages/AboutPage";
 import BlogPage from "../pages/BlogPage";
 import ShopPage from "../pages/ShopPage";
@@ -10,6 +10,7 @@ import ContactPage from "../pages/ContactPage";
 import TeamPage from "../pages/TeamPage";
 import SignUpPage from "../pages/SignUpPage";
 import LoginPage from "../pages/LoginPage";
+import ProductDetailPage from "../pages/ProductDetailPage";
 
 export default function PageContent() {
   return (
@@ -17,7 +18,7 @@ export default function PageContent() {
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/product" exact component={ProductPage} />
-        <Route path="/product/:id" exact component={ProductDetailsPage} /> {/* Yeni Route */}
+        <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId" component={ProductDetailPage} />{/* Yeni Route */}
         <Route path="/shop" exact component={ShopPage} />
         <Route path="/about" exact component={AboutPage} />
         <Route path="/blog" exact component={BlogPage} />
