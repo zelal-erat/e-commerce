@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductDetail } from '../actions/productActions';
+import { addToCart } from '../reducers/cartReducer';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const ProductDetailPage = () => {
@@ -16,6 +17,12 @@ const ProductDetailPage = () => {
 
   const handleImageError = (e) => {
     e.target.src = 'https://via.placeholder.com/400x400?text=No+Image';
+  };
+
+  const handleAddToCart = () => {
+    if (currentProduct && currentProduct.stock > 0) {
+      dispatch(addToCart(currentProduct));
+    }
   };
 
   if (productFetchState === "FETCHING") {
@@ -92,6 +99,7 @@ const ProductDetailPage = () => {
           </div>
 
           <button 
+            onClick={handleAddToCart}
             className={`w-full py-3 px-6 rounded-lg transition-colors ${
               currentProduct.stock > 0 
                 ? 'bg-blue-600 hover:bg-blue-700 text-white'
