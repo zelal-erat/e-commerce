@@ -13,6 +13,12 @@ export const fetchProducts = (params = {}) => async (dispatch) => {
     if (params.category) queryParams.append('category', params.category);
     if (params.sort) queryParams.append('sort', params.sort);
     if (params.filter) queryParams.append('filter', params.filter);
+    
+    // Pagination parametreleri
+    const limit = params.limit || 25;
+    const offset = params.offset || 0;
+    queryParams.append('limit', limit);
+    queryParams.append('offset', offset);
 
     const queryString = queryParams.toString();
     const url = `${API_URL}/products${queryString ? `?${queryString}` : ''}`;
