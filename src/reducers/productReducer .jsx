@@ -6,6 +6,7 @@ const initialState = {
   offset: 0,
   filter: "",
   fetchState: "NOT_FETCHED",
+  currentPage: 1
 };
 
 // Action Types
@@ -16,6 +17,7 @@ const SET_FETCH_STATE = "SET_FETCH_STATE";
 const SET_LIMIT = "SET_LIMIT";
 const SET_OFFSET = "SET_OFFSET";
 const SET_FILTER = "SET_FILTER";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 // Reducer
 const productReducer = (state = initialState, action) => {
@@ -34,6 +36,12 @@ const productReducer = (state = initialState, action) => {
       return { ...state, offset: action.payload };
     case SET_FILTER:
       return { ...state, filter: action.payload };
+    case SET_CURRENT_PAGE:
+      return { 
+        ...state, 
+        currentPage: action.payload,
+        offset: (action.payload - 1) * state.limit
+      };
     default:
       return state;
   }
@@ -47,12 +55,6 @@ export const setFetchState = (fetchState) => ({ type: SET_FETCH_STATE, payload: 
 export const setLimit = (limit) => ({ type: SET_LIMIT, payload: limit });
 export const setOffset = (offset) => ({ type: SET_OFFSET, payload: offset });
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: filter });
+export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, payload: page });
 
 export default productReducer;
-
-
-
-
-
-
-
