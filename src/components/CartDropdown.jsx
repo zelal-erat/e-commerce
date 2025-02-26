@@ -6,6 +6,7 @@ import {
   toggleCart,
   toggleItemCheck 
 } from '../reducers/cartReducer';
+import { Link } from 'react-router-dom';
 
 const CartDropdown = () => {
   const { cart, isOpen } = useSelector(state => state.cart);
@@ -107,6 +108,13 @@ const CartDropdown = () => {
                 <span className="text-gray-600 font-medium">Total:</span>
                 <span className="text-xl font-bold text-gray-900">${calculateTotal()}</span>
               </div>
+              <Link
+                to="/cart" 
+                className="block w-full text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                onClick={() => dispatch(toggleCart())}
+              >
+                Go to Cart
+              </Link>
               <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium">
                 Checkout
               </button>
