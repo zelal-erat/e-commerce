@@ -16,6 +16,8 @@ import ShoppingCart from "../pages/ShoppingCart";
 import ProtectedRoute from "../components/ProtectedRoute";
 import CreateOrderPage from "../pages/CreateOrderPage";
 import PaymentPage from "../pages/PaymentPage";
+import CompleteOrder from "../components/CompleteOrder";
+import OrderSuccess from "../pages/OrderSucsesPage";
 
 
 
@@ -40,6 +42,8 @@ export default function PageContent() {
         <Route path="/login" exact component={LoginPage} />
         <ProtectedRoute path="/create-order" exact component={CreateOrderPage}/>
         <ProtectedRoute path="/payment" exact component={PaymentPage}/>
+        <ProtectedRoute path="/order" exact component={CompleteOrder}/>
+        <ProtectedRoute path="/order-success" exact component={OrderSuccess}/>
         
       </Switch>
     </div>

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addPayment, deletePayment, fetchPayments, updatePayment } from "../actions/paymentAction";
+import { useHistory } from "react-router-dom";
 
 const PaymentPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { payments } = useSelector((state) => state.payment);
 
   const [showForm, setShowForm] = useState(false);
   const [editingCard, setEditingCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
   const [cardData, setCardData] = useState({
     card_no: "",
     expire_month: "",
@@ -19,12 +22,10 @@ const PaymentPage = () => {
     dispatch(fetchPayments());
   }, [dispatch]);
 
-  // ✅ Form verisini güncelle
   const handleChange = (e) => {
     setCardData({ ...cardData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Yeni kart ekleme veya güncelleme
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editingCard) {
@@ -37,18 +38,30 @@ const PaymentPage = () => {
     setCardData({ card_no: "", expire_month: "", expire_year: "", name_on_card: "" });
   };
 
-  // ✅ Kart silme işlemi
   const handleDelete = (cardId) => {
     if (window.confirm("Bu kartı silmek istediğinize emin misiniz?")) {
       dispatch(deletePayment(cardId));
     }
   };
 
-  // ✅ Kart güncelleme butonuna basıldığında formu doldur
   const handleEdit = (card) => {
     setEditingCard(card);
     setCardData(card);
     setShowForm(true);
+  };
+
+  const handleSelectCard = (card) => {
+    setSelectedCard(card);
+  };
+
+  // ✅ Siparişi tamamla ve Create Order sayfasına yönlendir
+  const handleCompleteOrder = () => {
+    if (!selectedCard) {
+      alert("Lütfen bir ödeme yöntemi seçin!");
+      return;
+    }
+
+    history.push("/order", { selectedCard });
   };
 
   return (
@@ -61,9 +74,15 @@ const PaymentPage = () => {
         {payments.length > 0 ? (
           <ul>
             {payments.map((card) => (
-              <li key={card.id} className="flex justify-between items-center p-2 border-b">
+              <li
+                key={card.id}
+                className={`flex justify-between items-center p-2 border-b cursor-pointer ${
+                  selectedCard?.id === card.id ? "bg-blue-100" : ""
+                }`}
+                onClick={() => handleSelectCard(card)}
+              >
                 <div>
-                  <p>{card.name_on_card}</p>
+                  <p className="font-bold">{card.name_on_card}</p>
                   <p>**** **** **** {card.card_no.slice(-4)}</p>
                   <p>Son Kullanma: {card.expire_month}/{card.expire_year}</p>
                 </div>
@@ -104,6 +123,13 @@ const PaymentPage = () => {
           </div>
         )}
       </div>
+
+      <button
+        onClick={handleCompleteOrder}
+        className="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      >
+        Siparişi Tamamla
+      </button>
     </div>
   );
 };
