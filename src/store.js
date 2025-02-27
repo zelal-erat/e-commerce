@@ -9,6 +9,8 @@ import authReducer from "./reducers/authReducer";
 import categoryReducer from "./reducers/categoryReducer";
 import cartReducer from "./reducers/cartReducer";
 import addressReducer from "./reducers/addressReducer";
+import paymentReducer from "./reducers/paymentReducer";
+
 
 // Tüm reducer'ları birleştiriyoruz
 const rootReducer = combineReducers({
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   categories: categoryReducer,
   cart: cartReducer,
   address: addressReducer,
+  payment:paymentReducer,
+  
 });
 
 // Middleware ekleyerek store'u oluşturuyoruz
