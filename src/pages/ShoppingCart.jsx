@@ -2,10 +2,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateCartItem, toggleItemCheck } from "../reducers/cartReducer";
+import { useHistory } from "react-router-dom";
 
 const ShoppingCart = () => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleQuantityChange = (productId, newCount) => {
     if (newCount < 1) {
@@ -104,7 +106,10 @@ const ShoppingCart = () => {
             <span>Grand Total:</span>
             <span>${grandTotal}</span>
           </div>
-          <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+          <button 
+            className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+            onClick={() => history.push('/create-order')}
+          >
             Create Order
           </button>
         </div>

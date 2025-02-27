@@ -13,6 +13,9 @@ import LoginPage from "../pages/LoginPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import ShoppingCart from "../pages/ShoppingCart";
 
+import ProtectedRoute from "../components/ProtectedRoute";
+import CreateOrderPage from "../pages/CreateOrderPage";
+
 
 
 
@@ -34,7 +37,7 @@ export default function PageContent() {
        
         <Route path="/signup" exact component={SignUpPage} />
         <Route path="/login" exact component={LoginPage} />
-     
+        <ProtectedRoute path="/create-order" exact component={CreateOrderPage} />
       </Switch>
     </div>
   );
