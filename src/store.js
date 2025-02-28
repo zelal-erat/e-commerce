@@ -11,6 +11,7 @@ import cartReducer from "./reducers/cartReducer";
 import addressReducer from "./reducers/addressReducer";
 import paymentReducer from "./reducers/paymentReducer";
 import { orderReducer } from "./reducers/orderReducer";
+import userOrdersReducer from "./reducers/userOrderReducer";
 
 
 // Tüm reducer'ları birleştiriyoruz
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   address: addressReducer,
   payment:paymentReducer,
   order:orderReducer,
+  userOrders:userOrdersReducer,
   
 });
 

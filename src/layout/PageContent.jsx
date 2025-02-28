@@ -18,6 +18,7 @@ import CreateOrderPage from "../pages/CreateOrderPage";
 import PaymentPage from "../pages/PaymentPage";
 import CompleteOrder from "../components/CompleteOrder";
 import OrderSuccess from "../pages/OrderSucsesPage";
+import PreviousOrdersPage from "../pages/PreviousOrdersPage";
 
 
 
@@ -44,6 +45,8 @@ export default function PageContent() {
         <ProtectedRoute path="/payment" exact component={PaymentPage}/>
         <ProtectedRoute path="/order" exact component={CompleteOrder}/>
         <ProtectedRoute path="/order-success" exact component={OrderSuccess}/>
+        <ProtectedRoute path="/previous-orders" exact component={PreviousOrdersPage}/>
+
         
       </Switch>
     </div>
