@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import ProductPage from "../pages/ProductPage";
+
  // Yeni bileşeni içe aktar
 import AboutPage from "../pages/AboutPage";
 import BlogPage from "../pages/BlogPage";
@@ -28,7 +28,7 @@ export default function PageContent() {
     <div className="container mx-auto px-4">
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/product" exact component={ProductPage} />
+       
         <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId" component={ProductDetailPage} />{/* Yeni Route */}
         <Route path="/shop" exact component={ShopPage} />
         <Route path="/about" exact component={AboutPage} />
