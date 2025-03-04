@@ -31,16 +31,14 @@ export default function ShopPage() {
     const [filter, setFilter] = useState("");
     const [appliedFilter, setAppliedFilter] = useState("");
 
-    // 1️⃣ Kategori değiştiğinde state ve URL'i temizleyip ürünleri yükle
     useEffect(() => {
         setSort("");
         setFilter("");
         setAppliedFilter("");
-        dispatch(setCurrentPage(1)); // Sayfayı da sıfırla
+        dispatch(setCurrentPage(1));
 
         history.replace({ search: "" });
 
-        // İlk yükleme
         dispatch(fetchProducts({
             limit,
             offset: 0,
@@ -51,7 +49,6 @@ export default function ShopPage() {
 
     }, [categoryId, dispatch, history]);
 
-    // 2️⃣ sort, appliedFilter veya sayfa değişince ürünleri yeniden yükle
     useEffect(() => {
         dispatch(fetchProducts({
             limit,
@@ -60,10 +57,14 @@ export default function ShopPage() {
             sort: sort,
             filter: appliedFilter,
         }));
+
+        updateURL(sort, appliedFilter, currentPage);
     }, [sort, appliedFilter, currentPage, categoryId, dispatch, limit]);
 
-    const updateURL = (newSort, newFilter) => {
+    const updateURL = (newSort, newFilter, newPage) => {
         const searchParams = new URLSearchParams();
+        searchParams.set("limit", limit);
+        searchParams.set("offset", (newPage - 1) * limit);
         if (newSort) searchParams.set("sort", newSort);
         if (newFilter) searchParams.set("filter", newFilter);
         history.replace({ search: searchParams.toString() });
@@ -77,13 +78,10 @@ export default function ShopPage() {
     const handleFilterApply = () => {
         setAppliedFilter(filter);
         dispatch(setCurrentPage(1));
-        updateURL(sort, filter);
     };
 
     const handleSortChange = (e) => {
-        const newSort = e.target.value;
-        setSort(newSort);
-        updateURL(newSort, appliedFilter);
+        setSort(e.target.value);
     };
 
     const pageCount = Math.ceil(total / limit);
